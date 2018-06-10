@@ -1,0 +1,10 @@
+#buttons { /* Typography */
+    text-align: center;
+  }
+  
+  button {
+    width: 100px;
+  
+    /* Box-model */
+    height: 50px;
+  }
