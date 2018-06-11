@@ -1,7 +1,10 @@
 var number = 120;
 var intervalId;
-$("#submit").on("click", stop);
-$("#start").on("click", stop);
+var correct = 0;
+var incorrect = 0;
+var unanswered = 0;
+$("#submit").on("click", submit);
+$("#start").on("click", start);
 var questionData = {
     questions: {
         question1: "Who was the only non-member of the Beatles to receive a performance credit on an album?",
@@ -24,48 +27,87 @@ var questionData = {
 }
 
 function start() {
-    
+
     clearInterval(intervalId);
     intervalId = setInterval(decrement, 1000);
-    
 
-    
-     displayQuestions()
+
+
+    displayQuestions()
 }
 
-function displayQuestions(){
+function displayQuestions() {
     html = "<p>" + questionData.questions.question1 + "</p>";
     $("#questions").html(html);
     console.log(questionData.options.options1);
-    for(i = 0; i < questionData.options.options1.length; i++){
+    for (i = 0; i < questionData.options.options1.length; i++) {
 
-    $("#radiobutton").text(questionData.options.options1[i]);
-        
+        $("#options").append('<input type="radio" class="radiobutton" id="option" name="option1"><label for="option">' + questionData.options.options1[i] + '</label>');
+
+
+
     }
     $("#questions").append(questionData.questions.question2);
 }
 
-
 function submit() {
-    console.log
+    console.log("entered");
+    isCorrect = false;
+    //on submit, check to see which guesses were selected
+    for (i = 0; i < questionData.options.options1.length; i++) {
+        var isChecked = $('.radiobutton').is(':checked');
+        if (isChecked) {
+            console.log("something is checked");
+            //compare to answer
+            if (questionData.answers.answer1 === questionData.options.options1[i]) {
+                console.log(questionData.answers.answer1 + "***" + questionData.options.options1[i])
+                correct++
+                isCorrect = 1;
+            }
+            
+
+        }
+        if (isCorrect === 0){
+            incorrect++;
+        }
+
+        else if (isChecked === false){
+            unanswered++;
+        }
+
+    }
+    writeResults();
+
+}
+
+function writeResults() {
+    html = "You answered " + correct + "correct";
+    console.log(html);
+    $("#results").text(html);
+    html = "You answered " + incorrect + " incorrect";
+    $("#results").append(html);
+    html = "and you didn't answer " + unanswered;
+    $("#results").append(html);
+
+
 }
 
 
 //  The decrement function.
 function decrement() {
 
-   //  Decrease number by one.
-   number--;
+    //  Decrease number by one.
+    number--;
 
-   //  Show the number in the #show-number tag.
-   $("#show-number").html("<h2>" + number + "</h2>");
+    //  Show the number in the #show-number tag.
+    $("#show-number").html("<h2>" + number + "</h2>");
 
 
-   //  Once number hits zero...
-   if (number === 0) {
+    //  Once number hits zero...
+    if (number === 0) {
 
-     //  ...run the stop function.
-     stop();
+        //  ...run the stop function.
+        stop();
 
     }
 }
