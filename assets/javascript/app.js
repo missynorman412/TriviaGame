@@ -5,7 +5,7 @@ $("#start").on("click", stop);
 var questionData = {
     questions: {
         question1: "Who was the only non-member of the Beatles to receive a performance credit on an album?",
-        question2: "Who was the oldest Beatle",
+        question2: "Who was the oldest Beatle?",
         question3: "The Beatles’ 1967 double A-side Strawberry Fields Forever/Penny Lane became their first single since Love Me Do in 1962 to fail to top the UK charts. What held it at number two?",
         question4: "Which of the following Beatles songs was not banned by the BBC?"
     },
@@ -30,14 +30,19 @@ function start() {
     
 
     
-    // displayQuestions()
+     displayQuestions()
 }
 
 function displayQuestions(){
-    $("#questions").append(questions.question1);
-    for(i = 0; i < questions.options.length; i++){
-        $("radiobutton").append(questions.option1[i]);
+    html = "<p>" + questionData.questions.question1 + "</p>";
+    $("#questions").html(html);
+    console.log(questionData.options.options1);
+    for(i = 0; i < questionData.options.options1.length; i++){
+
+    $("#radiobutton").text(questionData.options.options1[i]);
+        
     }
+    $("#questions").append(questionData.questions.question2);
 }
 
 
