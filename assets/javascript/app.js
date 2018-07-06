@@ -49,7 +49,9 @@ var questionArray = [
 
 // On ready function
 $(document).ready(function(){
+    
     displayQuestions();
+
 })
 
 function start() {
@@ -60,12 +62,14 @@ function start() {
     $("#start").hide();
     // Show questions and timer
     $("#questions").show();
+    $("#results").hide();
     $("#show-number").show();
 
     
 }
 
 function displayQuestions() {
+    
     // Change function logic to work with the newly formed array
     // Create a for loop that goes through the questionArray
     for(var i = 0; i < questionArray.length; i++){
@@ -95,6 +99,7 @@ function displayQuestions() {
 }
 
 function submit(event) {
+    $("#results").show();
     event.preventDefault();
     // Create a variable that hold all of the checked options on submit
     var isChecked = $(".radiobutton:checked")
@@ -123,6 +128,7 @@ function submit(event) {
     $("#show-number").hide();
     // Show start button again but have the text say reset
     $("#start").text("Try Again?").show();
+
 }
 
 $(document).on("click", "#submit", submit);
